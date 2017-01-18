@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hexo," />
+  <meta name="keywords" content="springmvc,annotation," />
 
 
 
@@ -84,28 +84,22 @@
 
 
 
-<meta name="description" content="hexo是一款强大的博客框架, 作为一个后台开发人员来说, 真的是爱不释手, 让我可以专注于写内容. 目前hexo提供的功能已经完全能够满足我的需求了. 给hexo点无限个👍
-搭建hexo链接:
-http://www.cylong.com/blog/2016/04/19/hexo-git/
-感谢cylong分享的技术  
-该博主的h5页面真的很爽">
+<meta name="description" content="这是我个人在工作中使用requestMapping的时候产生的疑问, 然后查查资料自己总结在工作中能使用的方面, 并不全, 我个人是为了解决一些问题才会做一些资料的查询和搜集, 如果要系统的学习的话, 还是建议看看专业书籍  
+源码@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="致敬hexo及分享者们">
-<meta property="og:url" content="http://yoursite.com/2017/01/18/致敬hexo及分享者们/index.html">
+<meta property="og:title" content="RequestMapping 属性解释">
+<meta property="og:url" content="http://yoursite.com/2017/01/18/requestMapping/index.html">
 <meta property="og:site_name" content="努力改变人生">
-<meta property="og:description" content="hexo是一款强大的博客框架, 作为一个后台开发人员来说, 真的是爱不释手, 让我可以专注于写内容. 目前hexo提供的功能已经完全能够满足我的需求了. 给hexo点无限个👍
-搭建hexo链接:
-http://www.cylong.com/blog/2016/04/19/hexo-git/
-感谢cylong分享的技术  
-该博主的h5页面真的很爽">
-<meta property="og:updated_time" content="2017-01-18T10:40:30.000Z">
+<meta property="og:description" content="这是我个人在工作中使用requestMapping的时候产生的疑问, 然后查查资料自己总结在工作中能使用的方面, 并不全, 我个人是为了解决一些问题才会做一些资料的查询和搜集, 如果要系统的学习的话, 还是建议看看专业书籍  
+源码@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)">
+<meta property="og:updated_time" content="2017-01-18T13:46:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="致敬hexo及分享者们">
-<meta name="twitter:description" content="hexo是一款强大的博客框架, 作为一个后台开发人员来说, 真的是爱不释手, 让我可以专注于写内容. 目前hexo提供的功能已经完全能够满足我的需求了. 给hexo点无限个👍
-搭建hexo链接:
-http://www.cylong.com/blog/2016/04/19/hexo-git/
-感谢cylong分享的技术  
-该博主的h5页面真的很爽">
+<meta name="twitter:title" content="RequestMapping 属性解释">
+<meta name="twitter:description" content="这是我个人在工作中使用requestMapping的时候产生的疑问, 然后查查资料自己总结在工作中能使用的方面, 并不全, 我个人是为了解决一些问题才会做一些资料的查询和搜集, 如果要系统的学习的话, 还是建议看看专业书籍  
+源码@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)">
 
 
 
@@ -123,7 +117,7 @@ http://www.cylong.com/blog/2016/04/19/hexo-git/
   };
 </script>
 
-  <title> 致敬hexo及分享者们 | 努力改变人生 </title>
+  <title> RequestMapping 属性解释 | 努力改变人生 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -263,7 +257,7 @@ http://www.cylong.com/blog/2016/04/19/hexo-git/
             
             
               
-                致敬hexo及分享者们
+                RequestMapping 属性解释
               
             
           </h1>
@@ -275,7 +269,7 @@ http://www.cylong.com/blog/2016/04/19/hexo-git/
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-18T14:55:06+08:00" content="2017-01-18">
+            <time itemprop="dateCreated" datetime="2017-01-18T21:39:06+08:00" content="2017-01-18">
               2017-01-18
             </time>
           </span>
@@ -289,8 +283,20 @@ http://www.cylong.com/blog/2016/04/19/hexo-git/
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
+                  <a href="/categories/springmvc/" itemprop="url" rel="index">
+                    <span itemprop="name">springmvc</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/springmvc/annotation/" itemprop="url" rel="index">
+                    <span itemprop="name">annotation</span>
                   </a>
                 </span>
 
@@ -322,11 +328,86 @@ http://www.cylong.com/blog/2016/04/19/hexo-git/
       
 
       
-        <p>hexo是一款强大的博客框架, 作为一个后台开发人员来说, 真的是爱不释手, 让我可以专注于写内容. 目前hexo提供的功能已经完全能够满足我的需求了. 给hexo点无限个👍</p>
-<p>搭建hexo链接:</p>
-<p><a href="http://www.cylong.com/blog/2016/04/19/hexo-git/" target="_blank" rel="external">http://www.cylong.com/blog/2016/04/19/hexo-git/</a></p>
-<p>感谢cylong分享的技术  </p>
-<p>该博主的h5页面真的很爽</p>
+        <p>这是我个人在工作中使用requestMapping的时候产生的疑问, 然后查查资料自己总结在工作中能使用的方面, 并不全, 我个人是为了解决一些问题才会做一些资料的查询和搜集, 如果要系统的学习的话, 还是建议看看专业书籍  </p>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><pre><code class="java"><span class="meta">@Target</span>({ElementType.METHOD, ElementType.TYPE})
+<span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)
+<span class="meta">@Documented</span>
+<span class="meta">@Mapping</span>
+<span class="keyword">public</span> <span class="meta">@interface</span> RequestMapping { 
+    String[] value() <span class="keyword">default</span> {};              
+    String[] params() <span class="keyword">default</span> {};        
+    String[] headers() <span class="keyword">default</span> {};        
+    String[] consumes() <span class="keyword">default</span> {};        
+    String[] produces() <span class="keyword">default</span> {};  
+    RequestMethod[] method() <span class="keyword">default</span> {};  
+}
+</code></pre>
+<p>单词解释:  </p>
+<pre><code class="java">Retention: 保留  
+produces: 产生  
+consume: 消费, 消耗
+</code></pre>
+<p><code>@RequestMapping</code>  </p>
+<p>RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。</p>
+<p>RequestMapping注解有六个属性，下面分别进行说明。 </p>
+<h3 id="value"><a href="#value" class="headerlink" title="value:"></a>value:</h3><blockquote>
+<p>指定请求的实际地址，指定的地址可以是URI Template 模式（后面将会说明);<br>@RequestMapping(value = “/test”)  </p>
+</blockquote>
+<h3 id="method"><a href="#method" class="headerlink" title="method:"></a>method:</h3><blockquote>
+<p>指定请求的method类型， GET、POST、PUT、DELETE等；<br>@RequestMapping(value = “/test”, method = RequetMethod.GET)  </p>
+</blockquote>
+<h3 id="consumes"><a href="#consumes" class="headerlink" title="consumes:"></a>consumes:</h3><blockquote>
+<p>指定处理请求的提交内容类型（Content-Type），例如application/json, text/html;  </p>
+<pre><code class="java"><span class="meta">@Controller</span>    
+<span class="meta">@RequestMapping</span>(    value = <span class="string">"/users"</span>, 
+                    method = RequestMethod.POST, 
+                    consumes=<span class="string">"application/json"</span>)    
+<span class="meta">@ResponseBody</span>  
+<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">addUser</span><span class="params">(@RequestBody User userl)</span> </span>{            
+    <span class="comment">// implementation omitted        </span>
+    <span class="keyword">return</span> List&lt;User&gt; users;  
+}
+</code></pre>
+<p>此方法仅处理request Content-Type为”application/json”类型的请求</p>
+</blockquote>
+<h3 id="produces"><a href="#produces" class="headerlink" title="produces:"></a>produces:</h3><blockquote>
+<p>指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回； (相当于指定当前请求的返回Content-Type类型)  </p>
+<pre><code class="java"><span class="meta">@Controller</span>    
+<span class="meta">@RequestMapping</span>(    value = <span class="string">"/users"</span>, 
+                    method = RequestMethod.POST,
+                    produces=<span class="string">"application/json"</span>)    
+                    <span class="meta">@ResponseBody</span>  
+<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">addUser</span><span class="params">(@RequestBody User userl)</span> </span>{            
+    <span class="comment">// implementation omitted        </span>
+    <span class="keyword">return</span> List&lt;User&gt; users;  
+}
+</code></pre>
+<p>此方法产生Content-Type为”application/json”类型的响应  </p>
+</blockquote>
+<p>(这里网上许多人说prodcues是只处理对应格式的请求, 但我认为是错的, 按照我理解的意思, produces本身就是产生的意思, 添加produces应该是指定返回值类型为json, 而consumer才是指定接受参数的媒体类型, 实测确实如此, 如果指定了consumer, 那么请求参数类型若不是该类型, 会报出Error 415 Unsupported Media Type的错误)</p>
+<h3 id="params"><a href="#params" class="headerlink" title="params:"></a>params:</h3><blockquote>
+<p>指定request中必须包含某些参数值是，才让该方法处理。</p>
+<pre><code class="java"><span class="meta">@RequestMapping</span>(    value = <span class="string">"/test/{userId}"</span>, 
+                    method = RequestMethod.GET, 
+                    params=<span class="string">"myParam=myValue"</span>)    
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findUser</span><span class="params">(@PathVariable String userId)</span> </span>{          
+    <span class="comment">// implementation omitted    </span>
+}
+</code></pre>
+<p>仅处理请求中包含了名为”myParam”, 值为”myValue”的请求, 起到了一个过滤的作用</p>
+<p>(经过测试, 如果添加了params参数, 那么在请求中一定要包含该指定才能进入方法执行, 如果没有传参, 那么会提示400错误 Error 400 Parameter conditions “hello=world” not met for actual request parameters: uid={1}, 告诉请求者, 这个参数是明确要求传的参数)</p>
+</blockquote>
+<h3 id="headers"><a href="#headers" class="headerlink" title="headers:"></a>headers:</h3><blockquote>
+<p>指定request中必须包含某些指定的header值，才能让该方法处理请求。</p>
+<pre><code class="java"><span class="meta">@RequestMapping</span>(    value = <span class="string">"/test"</span>, 
+                    method = RequestMethod.GET, 
+                    headers=<span class="string">"Referer=www.baidu.com"</span>)    
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testHeaders</span><span class="params">(@PathVariable String ownerId, @PathVariable String petId)</span></span>{          
+    <span class="comment">// implementation omitted    </span>
+}
+</code></pre>
+<p>当添加了Headers之后, 只有在请求头中添加上Referer=ABC这样的键值对,才能使该方法执行, 否则在调用接口的时候会出现404, 找不到该地址</p>
+</blockquote>
 
       
     </div>
@@ -348,7 +429,9 @@ http://www.cylong.com/blog/2016/04/19/hexo-git/
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag">#hexo</a>
+            <a href="/tags/springmvc/" rel="tag">#springmvc</a>
+          
+            <a href="/tags/annotation/" rel="tag">#annotation</a>
           
         </div>
       
@@ -357,17 +440,13 @@ http://www.cylong.com/blog/2016/04/19/hexo-git/
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/17/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2017/01/18/ContentType/" rel="next" title="http请求头 content-type">
+                <i class="fa fa-chevron-left"></i> http请求头 content-type
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/18/python-基础语法/" rel="prev" title="python 基础语法 数据类型">
-                python 基础语法 数据类型 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -481,7 +560,7 @@ http://www.cylong.com/blog/2016/04/19/hexo-git/
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#源码"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#value"><span class="nav-number">2.</span> <span class="nav-text">value:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#method"><span class="nav-number">3.</span> <span class="nav-text">method:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#consumes"><span class="nav-number">4.</span> <span class="nav-text">consumes:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#produces"><span class="nav-number">5.</span> <span class="nav-text">produces:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#params"><span class="nav-number">6.</span> <span class="nav-text">params:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#headers"><span class="nav-number">7.</span> <span class="nav-text">headers:</span></a></li></ol></div>
             
           </div>
         </section>

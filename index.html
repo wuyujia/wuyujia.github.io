@@ -250,6 +250,389 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/18/requestMapping/" itemprop="url">
+                  RequestMapping 属性解释
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-18T21:39:06+08:00" content="2017-01-18">
+              2017-01-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/springmvc/" itemprop="url" rel="index">
+                    <span itemprop="name">springmvc</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/springmvc/annotation/" itemprop="url" rel="index">
+                    <span itemprop="name">annotation</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这是我个人在工作中使用requestMapping的时候产生的疑问, 然后查查资料自己总结在工作中能使用的方面, 并不全, 我个人是为了解决一些问题才会做一些资料的查询和搜集, 如果要系统的学习的话, 还是建议看看专业书籍  </p>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><pre><code class="java"><span class="meta">@Target</span>({ElementType.METHOD, ElementType.TYPE})
+<span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)
+<span class="meta">@Documented</span>
+<span class="meta">@Mapping</span>
+<span class="keyword">public</span> <span class="meta">@interface</span> RequestMapping { 
+    String[] value() <span class="keyword">default</span> {};              
+    String[] params() <span class="keyword">default</span> {};        
+    String[] headers() <span class="keyword">default</span> {};        
+    String[] consumes() <span class="keyword">default</span> {};        
+    String[] produces() <span class="keyword">default</span> {};  
+    RequestMethod[] method() <span class="keyword">default</span> {};  
+}
+</code></pre>
+<p>单词解释:  </p>
+<pre><code class="java">Retention: 保留  
+produces: 产生  
+consume: 消费, 消耗
+</code></pre>
+<p><code>@RequestMapping</code>  </p>
+<p>RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。</p>
+<p>RequestMapping注解有六个属性，下面分别进行说明。 </p>
+<h3 id="value"><a href="#value" class="headerlink" title="value:"></a>value:</h3><blockquote>
+<p>指定请求的实际地址，指定的地址可以是URI Template 模式（后面将会说明);<br>@RequestMapping(value = “/test”)  </p>
+</blockquote>
+<h3 id="method"><a href="#method" class="headerlink" title="method:"></a>method:</h3><blockquote>
+<p>指定请求的method类型， GET、POST、PUT、DELETE等；<br>@RequestMapping(value = “/test”, method = RequetMethod.GET)  </p>
+</blockquote>
+<h3 id="consumes"><a href="#consumes" class="headerlink" title="consumes:"></a>consumes:</h3><blockquote>
+<p>指定处理请求的提交内容类型（Content-Type），例如application/json, text/html;  </p>
+<pre><code class="java"><span class="meta">@Controller</span>    
+<span class="meta">@RequestMapping</span>(    value = <span class="string">"/users"</span>, 
+                    method = RequestMethod.POST, 
+                    consumes=<span class="string">"application/json"</span>)    
+<span class="meta">@ResponseBody</span>  
+<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">addUser</span><span class="params">(@RequestBody User userl)</span> </span>{            
+    <span class="comment">// implementation omitted        </span>
+    <span class="keyword">return</span> List&lt;User&gt; users;  
+}
+</code></pre>
+<p>此方法仅处理request Content-Type为”application/json”类型的请求</p>
+</blockquote>
+<h3 id="produces"><a href="#produces" class="headerlink" title="produces:"></a>produces:</h3><blockquote>
+<p>指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回； (相当于指定当前请求的返回Content-Type类型)  </p>
+<pre><code class="java"><span class="meta">@Controller</span>    
+<span class="meta">@RequestMapping</span>(    value = <span class="string">"/users"</span>, 
+                    method = RequestMethod.POST,
+                    produces=<span class="string">"application/json"</span>)    
+                    <span class="meta">@ResponseBody</span>  
+<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">addUser</span><span class="params">(@RequestBody User userl)</span> </span>{            
+    <span class="comment">// implementation omitted        </span>
+    <span class="keyword">return</span> List&lt;User&gt; users;  
+}
+</code></pre>
+<p>此方法产生Content-Type为”application/json”类型的响应  </p>
+</blockquote>
+<p>(这里网上许多人说prodcues是只处理对应格式的请求, 但我认为是错的, 按照我理解的意思, produces本身就是产生的意思, 添加produces应该是指定返回值类型为json, 而consumer才是指定接受参数的媒体类型, 实测确实如此, 如果指定了consumer, 那么请求参数类型若不是该类型, 会报出Error 415 Unsupported Media Type的错误)</p>
+<h3 id="params"><a href="#params" class="headerlink" title="params:"></a>params:</h3><blockquote>
+<p>指定request中必须包含某些参数值是，才让该方法处理。</p>
+<pre><code class="java"><span class="meta">@RequestMapping</span>(    value = <span class="string">"/test/{userId}"</span>, 
+                    method = RequestMethod.GET, 
+                    params=<span class="string">"myParam=myValue"</span>)    
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findUser</span><span class="params">(@PathVariable String userId)</span> </span>{          
+    <span class="comment">// implementation omitted    </span>
+}
+</code></pre>
+<p>仅处理请求中包含了名为”myParam”, 值为”myValue”的请求, 起到了一个过滤的作用</p>
+<p>(经过测试, 如果添加了params参数, 那么在请求中一定要包含该指定才能进入方法执行, 如果没有传参, 那么会提示400错误 Error 400 Parameter conditions “hello=world” not met for actual request parameters: uid={1}, 告诉请求者, 这个参数是明确要求传的参数)</p>
+</blockquote>
+<h3 id="headers"><a href="#headers" class="headerlink" title="headers:"></a>headers:</h3><blockquote>
+<p>指定request中必须包含某些指定的header值，才能让该方法处理请求。</p>
+<pre><code class="java"><span class="meta">@RequestMapping</span>(    value = <span class="string">"/test"</span>, 
+                    method = RequestMethod.GET, 
+                    headers=<span class="string">"Referer=www.baidu.com"</span>)    
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testHeaders</span><span class="params">(@PathVariable String ownerId, @PathVariable String petId)</span></span>{          
+    <span class="comment">// implementation omitted    </span>
+}
+</code></pre>
+<p>当添加了Headers之后, 只有在请求头中添加上Referer=ABC这样的键值对,才能使该方法执行, 否则在调用接口的时候会出现404, 找不到该地址</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/18/ContentType/" itemprop="url">
+                  http请求头 content-type
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-18T21:30:06+08:00" content="2017-01-18">
+              2017-01-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/http/" itemprop="url" rel="index">
+                    <span itemprop="name">http</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/http/header/" itemprop="url" rel="index">
+                    <span itemprop="name">header</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>Content-Type</code>  </p>
+<p>MediaType，即是Internet Media Type，互联网媒体类型；也叫做MIME类型，在Http协议消息头中，使用Content-Type来表示具体请求中的媒体类型信息。  </p>
+<p>类型格式：<br><code>type/subtype(;parameter)</code><br>type  主类型，任意的字符串，如text，如果是*号代表所有；<br>subtype 子类型，任意的字符串，如html，如果是*号代表所有；<br>parameter 可选，一些参数，如Accept请求头的q参数， Content-Type的 charset参数。<br><code>例如： Content-Type: text/html;charset:utf-8;</code>  </p>
+<p>常见的媒体格式类型如下：  </p>
+<pre><code class="http">    text/html ： HTML格式
+
+    text/plain ：纯文本格式      
+
+    text/xml ：  XML格式    
+
+    image/gif ：gif图片格式    
+
+    image/jpeg ：jpg图片格式
+
+    image/png：png图片格式
+
+以application开头的媒体格式类型：
+
+    application/xhtml+xml ：XHTML格式   
+
+    application/xml     ： XML数据格式   
+
+    application/atom+xml  ：Atom XML聚合格式    
+
+    application/json    ： JSON数据格式   
+
+    application/pdf       ：pdf格式  
+
+    application/msword  ： Word文档格式   
+
+    application/octet-stream ： 二进制流数据（如常见的文件下载application/x-www-form-urlencoded ： &lt;form encType=””&gt;中默认的encType，form表单数据被编码为key/value格式发送到服务器（表单默认的提交数据的格式）
+</code></pre>
+<p>另外一种常见的媒体格式是上传文件之时使用的：  </p>
+<pre><code class="http">multipart/form-data ： 需要在表单中进行文件上传时，就需要使用该格式
+</code></pre>
+<p>以上就是我们在日常的开发中，经常会用到的若干content-type的内容格式。  </p>
+<p>Content-Type在Java中的使用:  </p>
+<pre><code class="http">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+    &lt;version&gt;${spring.version}&lt;/version&gt;
+&lt;/dependency&gt;
+
+导入spring-web包以后可以使用:
+
+MediaType.APPLICATION_JSON_UTF8_VALUE
+
+@RequestMapping(value = "/test", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@ResponseBody
+public String test(HttpSession session) throws Exception {
+    logger.info("sessionId-------" + session.getId());
+    return Result.success(SystemConfig.Swagger.SWAGGER_JSON_URL);
+}
+</code></pre>
+<p>具体<a href="http://tool.oschina.net/commons" target="_blank" rel="external">Content-Type</a>对照表</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/01/18/python-基础语法/" itemprop="url">
                   python 基础语法 数据类型
                 </a>
@@ -686,7 +1069,7 @@ Answer = True
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -694,7 +1077,7 @@ Answer = True
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -703,7 +1086,7 @@ Answer = True
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
