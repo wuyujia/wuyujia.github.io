@@ -1,0 +1,651 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="apache,beanutils,PropertyUtils," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="背景:最近要开始写报表工具类, 经常需要动态的设置属性, 当然java反射是完全可以做到的, 但是个人认为, 既然有封装好的方法, 那就直接使用封装好的方法就Ok了, 我的目的是完成工具类. 并且采用apache的工具, 使用起来也是非常方便的, 非常感谢apache组织为世界所作出的贡献
+PropertyUtils简介与BeanUtils类似, 都是对javaBean进行操作的工具类. 其中,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PropertyUtils">
+<meta property="og:url" content="http://yoursite.com/2017/01/19/PropertyUtils/index.html">
+<meta property="og:site_name" content="努力改变人生">
+<meta property="og:description" content="背景:最近要开始写报表工具类, 经常需要动态的设置属性, 当然java反射是完全可以做到的, 但是个人认为, 既然有封装好的方法, 那就直接使用封装好的方法就Ok了, 我的目的是完成工具类. 并且采用apache的工具, 使用起来也是非常方便的, 非常感谢apache组织为世界所作出的贡献
+PropertyUtils简介与BeanUtils类似, 都是对javaBean进行操作的工具类. 其中,">
+<meta property="og:updated_time" content="2017-01-19T11:21:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PropertyUtils">
+<meta name="twitter:description" content="背景:最近要开始写报表工具类, 经常需要动态的设置属性, 当然java反射是完全可以做到的, 但是个人认为, 既然有封装好的方法, 那就直接使用封装好的方法就Ok了, 我的目的是完成工具类. 并且采用apache的工具, 使用起来也是非常方便的, 非常感谢apache组织为世界所作出的贡献
+PropertyUtils简介与BeanUtils类似, 都是对javaBean进行操作的工具类. 其中,">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> PropertyUtils | 努力改变人生 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">努力改变人生</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">你们都在努力, 我有什么理由松懈</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PropertyUtils
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-19T17:21:20+08:00" content="2017-01-19">
+              2017-01-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/apache/" itemprop="url" rel="index">
+                    <span itemprop="name">apache</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/apache/commons/" itemprop="url" rel="index">
+                    <span itemprop="name">commons</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/apache/commons/beanutils/" itemprop="url" rel="index">
+                    <span itemprop="name">beanutils</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景:"></a>背景:</h3><p>最近要开始写报表工具类, 经常需要动态的设置属性, 当然java反射是完全可以做到的, 但是个人认为, 既然有封装好的方法, 那就直接使用封装好的方法就Ok了, 我的目的是完成工具类. 并且采用apache的工具, 使用起来也是非常方便的, 非常感谢apache组织为世界所作出的贡献</p>
+<h3 id="PropertyUtils简介"><a href="#PropertyUtils简介" class="headerlink" title="PropertyUtils简介"></a>PropertyUtils简介</h3><p>与BeanUtils类似, 都是对javaBean进行操作的工具类. 其中, BeanUtils中我用的最多的就是<code>BeanUtils.copy(Object target, Object source)</code>了, 使用它的好处呢, 就是能够自动复制bean属性类型相同, bean属性名称相同的值到目标对象中, 为了我开发中大量是用get\set方法提供了十分简洁的解决方案. PropertyUtils我个人理解为单独为某个属性进行值的操作的工具类, 尽管它可以完成更为复杂的功能, 比如: 为已经生成.class的javaBean, 动态的添加属性, 但是, 这个方法我几乎用不到, 所以不再去深究, 如果将来需要用, 再去扒一扒原理就好了</p>
+<h3 id="PropertyUtils中的常用方法"><a href="#PropertyUtils中的常用方法" class="headerlink" title="PropertyUtils中的常用方法"></a>PropertyUtils中的常用方法</h3><h4 id="getProperty"><a href="#getProperty" class="headerlink" title="getProperty"></a>getProperty</h4><p><code>PropertyUtils.getProperty(Object bean, String name)</code><br><code>bean</code> 是不为null的Java Bean实例<br><code>name</code> 是Java Bean属性名称 (也就是方法中的getXxx(), setXxx(), 其中的xxx成为这个java bean的bean属性, java中的类成员变量称为字段, 并不是属性, Java Bean的命名规范(自行百度))<br>这个方法是获取bean, 中名为name的属性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// JavaBean</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">// 这里故意将字段名称设置和bean属性名称不一样</span></div><div class="line">	<span class="comment">// 意在告诉, 参数name指代的是getXxx() 的xxx才是bean属性</span></div><div class="line">    <span class="keyword">private</span> String hello;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Integer world;</div><div class="line"></div><div class="line">	<span class="comment">// getXxx() xxx才是属性</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> hello;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.hello = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getCount</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> world;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCount</span><span class="params">(Integer count)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.world = count;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>main方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">// 创建新实例</span></div><div class="line">        Car car = <span class="keyword">new</span> Car();</div><div class="line">        <span class="comment">// 设置属性</span></div><div class="line">        car.setName(<span class="string">"凯迪拉克"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// 通过工具类来获取实例中的属性值</span></div><div class="line">            String name = (String) PropertyUtils.getProperty(car, <span class="string">"name"</span>);</div><div class="line">            System.out.println(name);</div><div class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>运行结果:  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">凯迪拉克</div></pre></td></tr></table></figure>
+<p>可见使用工具类可以轻而易举的获取属性值. 但是为什么我们要这么麻烦的去获取值呢? 因为在程序运行过程中有很多时候数据是未知的, 特别是写工具类的时候 (业务逻辑就不存在这些问题了).</p>
+<h4 id="setProperty"><a href="#setProperty" class="headerlink" title="setProperty"></a>setProperty</h4><p><code>PropertyUtils.setProperty(Object bean, String name, String value)</code><br><code>bean</code>: 实例<br><code>name</code>: 属性<br><code>value</code>: 属性值  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">// 创建新实例</span></div><div class="line">        Car car = <span class="keyword">new</span> Car();</div><div class="line">        <span class="comment">// 设置属性</span></div><div class="line">        car.setName(<span class="string">"凯迪拉克"</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// 通过工具类来获取实例中的属性值</span></div><div class="line">            String name = (String) PropertyUtils.getProperty(car, <span class="string">"name"</span>);</div><div class="line">            System.out.println(name);</div><div class="line">            PropertyUtils.setProperty(car, <span class="string">"name"</span>, <span class="string">"劳斯莱斯"</span>);</div><div class="line">            System.out.println(car.getName());</div><div class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>运行结果:  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">凯迪拉克</div><div class="line">劳斯莱斯</div></pre></td></tr></table></figure>
+<h4 id="getPropertyDescriptor"><a href="#getPropertyDescriptor" class="headerlink" title="getPropertyDescriptor"></a>getPropertyDescriptor</h4><p><code>PropertyUtils.getPropertyDescriptor(Object bean, String name)</code><br><code>bean</code>: 实例<br><code>name</code>: 属性<br>这个方法是获取bean属性的描述, 我们可以从这个类获得什么呢?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    <span class="comment">// 创建新实例</span></div><div class="line">    Car car = <span class="keyword">new</span> Car();</div><div class="line">    <span class="comment">// 设置属性</span></div><div class="line">    car.setName(<span class="string">"凯迪拉克"</span>);</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="comment">// 通过工具类来获取实例中的属性类型</span></div><div class="line">        PropertyDescriptor descriptor = PropertyUtils.getPropertyDescriptor(car, <span class="string">"name"</span>);</div><div class="line">        Class&lt;?&gt; propertyType = descriptor.getPropertyType();</div><div class="line">        System.out.println(propertyType);</div><div class="line">    &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们可以从属性描述中获取这个属性的java数据类型, 这样我们可以根据判断数据类型, 做对应的处理<br><code>Class&lt;?&gt; propertyType = descriptor.getPropertyType();</code>  </p>
+<p>输出结果:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">java</span>.<span class="title">lang</span>.<span class="title">String</span></span></div></pre></td></tr></table></figure>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>有了这三个方法, 结合java反射, 我们就可以写一些功能比较全面的工具类, 也不需要自己再去封装获取属性, 设置值, 获取类型的方法了, 当然, 自己有能力的, 也可以封装一下, 这也不难.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/apache/" rel="tag">#apache</a>
+          
+            <a href="/tags/beanutils/" rel="tag">#beanutils</a>
+          
+            <a href="/tags/PropertyUtils/" rel="tag">#PropertyUtils</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/18/requestMapping/" rel="next" title="RequestMapping 属性解释">
+                <i class="fa fa-chevron-left"></i> RequestMapping 属性解释
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://a4.qpic.cn/psb?/V14H7Nty1TrrWG/Sh1E2PMhVFJDuz4d6yF5TpB0Mp5v6UkyTYkIuuYKPG4!/m/dB8BAAAAAAAAnull&bo=gAIYAwAAAAAFB70!&rf=photolist&t=5"
+               alt="wuyujia" />
+          <p class="site-author-name" itemprop="name">wuyujia</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PropertyUtils简介"><span class="nav-number">2.</span> <span class="nav-text">PropertyUtils简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PropertyUtils中的常用方法"><span class="nav-number">3.</span> <span class="nav-text">PropertyUtils中的常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#getProperty"><span class="nav-number">3.1.</span> <span class="nav-text">getProperty</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setProperty"><span class="nav-number">3.2.</span> <span class="nav-text">setProperty</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getPropertyDescriptor"><span class="nav-number">3.3.</span> <span class="nav-text">getPropertyDescriptor</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束语"><span class="nav-number">4.</span> <span class="nav-text">结束语</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wuyujia</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<!-- <script type="text/javascript" src="/js/src/particle.js"></script>
+<canvas id="c_n28" width="147" height="636" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas> -->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
