@@ -161,69 +161,69 @@ class java.lang.String
 ```
 
 #### getSimpleProperty  
-它的功能和`getProperty()`有些类似, 都是获取bean对象的属性值, 当属性值是普通值的时候, 使用`getProperty()`和`getSimpleProperty()`得到的结果一样  
+它的功能和`getProperty()`有些类似, 都是获取bean对象的属性值, 当属性值是普通值的时候, 使用`getProperty()`和`getSimpleProperty()`得到的结果一样:
 
 ```java
-public static void main(String[] args) {
-    // 创建新实例
-    Car car = new Car();
-    // 设置属性
-    // String
-    car.setName("汽车");
-    // int
-    car.setCount(1);
-    // Integer
-    car.setCountInt(2);
-    // 自定义数据类型
-    Brand brand = new Brand();
-    brand.setBrand("凯迪拉克");
-    car.setBrand(brand);
-    // List
-    List list = new ArrayList();
-    list.add("Hello");
-    car.setList(list);
-    // Map
-    Map map = new HashMap();
-    map.put("map","World");
-    car.setMap(map);
-    try {
-        // 这里演示如果知道数据类型, 是可以进行强制转换的
-        Integer count = (Integer) PropertyUtils.getSimpleProperty(car, "count");
-        System.out.println(count);
-        // 以下都是获取bean 中的属性值
-        Object countInt = PropertyUtils.getSimpleProperty(car, "countInt");
-        System.out.println(countInt);
-
-        Object brand1 = PropertyUtils.getSimpleProperty(car, "brand");
-        System.out.println(brand1);
-
-        Object list1 = PropertyUtils.getSimpleProperty(car, "list");
-        System.out.println(list1);
-
-        Object map1 = PropertyUtils.getSimpleProperty(car, "map");
-        System.out.println(map1);
-
-    } catch (IllegalAccessException e) {
-        e.printStackTrace();
-    } catch (InvocationTargetException e) {
-        e.printStackTrace();
-    } catch (NoSuchMethodException e) {
-        e.printStackTrace();
-    }
-}  
-```  
-
+	public static void main(String[] args) {
+	    // 创建新实例
+	    Car car = new Car();
+	    // 设置属性
+	    // String
+	    car.setName("汽车");
+	    // int
+	    car.setCount(1);
+	    // Integer
+	    car.setCountInt(2);
+	    // 自定义数据类型
+	    Brand brand = new Brand();
+	    brand.setBrand("凯迪拉克");
+	    car.setBrand(brand);
+	    // List
+	    List list = new ArrayList();
+	    list.add("Hello");
+	    car.setList(list);
+	    // Map
+	    Map map = new HashMap();
+	    map.put("map","World");
+	    car.setMap(map);
+	    try {
+	        // 这里演示如果知道数据类型, 是可以进行强制转换的
+	        Integer count = (Integer) PropertyUtils.getSimpleProperty(car, "count");
+	        System.out.println(count);
+	        // 以下都是获取bean 中的属性值
+	        Object countInt = PropertyUtils.getSimpleProperty(car, "countInt");
+	        System.out.println(countInt);
+	
+	        Object brand1 = PropertyUtils.getSimpleProperty(car, "brand");
+	        System.out.println(brand1);
+	
+	        Object list1 = PropertyUtils.getSimpleProperty(car, "list");
+	        System.out.println(list1);
+	
+	        Object map1 = PropertyUtils.getSimpleProperty(car, "map");
+	        System.out.println(map1);
+	
+	    } catch (IllegalAccessException e) {
+	        e.printStackTrace();
+	    } catch (InvocationTargetException e) {
+	        e.printStackTrace();
+	    } catch (NoSuchMethodException e) {
+	        e.printStackTrace();
+	    }
+	}  
+```
 
 
 运行结果:   
   
-```java  
+```java
 1
 2
 Brand{brand='凯迪拉克'}
 [Hello]
 {map=World}
-```    
+```
+     
 
 由上面的结果可以看出, 使用`getSimpleProperty()`方法得到的结果和`getProperty()`方法得到的结果是一样的, 那不同点在什么地方, 后面再讲.  
 
@@ -232,7 +232,7 @@ Brand{brand='凯迪拉克'}
 
 ### 方法之间的区别  
 直接了解完`getProperty()`和`getSimpleProperty()`之间的区别, set方法之间的区别就理解了, 是一个意思  
-先来看看`getProperty()`的源码:    
+先来看看`getProperty()`的源码:  
 
 ```java
 public Object getNestedProperty(Object bean, String name)
@@ -282,7 +282,8 @@ public Object getNestedProperty(Object bean, String name)
     return bean;
 
 }
-```  
+```
+  
 
 在方法的最后部分, `/**请看这里*/` 可以看到当传入参数没有什么特别之处的时候, 它会直接调用`getSimpleProperty()`方法获取数据.  
 
@@ -290,7 +291,7 @@ public Object getNestedProperty(Object bean, String name)
 
 这就是`getProperty()`和`getSimpleProperty()`的差别所在了!  
 
-假设我们现在有一个java数组`arr[]`, 我们要那其中的数据, 应该在`[]`中填入我们要取用的索引值, 例如: `arr[1]`取用数组arr索引值为1(第二个元素, 0是第一个元素)的值, 对应的集合也是这种方式, 例如: `list[0]`取用集合第一个元素  
+假设我们现在有一个java数组`arr[]`, 我们要那其中的数据, 应该在`[]`中填入我们要取用的索引值, 例如: `arr[1]`取用数组arr索引值为1(第二个元素, 0是第一个元素)的值, 对应的集合也是这种方式, 例如: `list[0]`取用集合第一个元素     
 
 ```java
 // 获取集合
@@ -299,9 +300,10 @@ System.out.println(list1);
 // 获取集合中的某个元素
 Object property = PropertyUtils.getProperty(car, "list[0]");
 System.out.println(property);
-```   
+```
 
-输出结果:
+
+输出结果:  
 
 ```java
 [Hello]
@@ -328,22 +330,24 @@ World
 ### 存在问题
 #### 空指针问题
 
-```java  
-	public static void main(String[] args) {
-	    // 创建新实例
-	    Car car = new Car();
-	    try {
-	        PropertyUtils.setProperty(car, "list[0]", "hello");
-	        System.out.println(car.getList());
-	    } catch (IllegalAccessException e) {
-	        e.printStackTrace();
-	    } catch (InvocationTargetException e) {
-	        e.printStackTrace();
-	    } catch (NoSuchMethodException e) {
-	        e.printStackTrace();
-	    }
-	}
-```  
+
+```java
+public static void main(String[] args) {
+    // 创建新实例
+    Car car = new Car();
+    try {
+        PropertyUtils.setProperty(car, "list[0]", "hello");
+        System.out.println(car.getList());
+    } catch (IllegalAccessException e) {
+        e.printStackTrace();
+    } catch (InvocationTargetException e) {
+        e.printStackTrace();
+    } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+    }
+}
+```   
+
 
 如果只是`new`了一个`car`对象, 然后就直接设置属性, 那么会抛出一个空指针异常, 为什么就不说了(如果不知道就弥补一下java基础)  
 同理, 如果map中没有对应的key值, 同样会出现空指针异常
