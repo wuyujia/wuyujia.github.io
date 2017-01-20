@@ -92,7 +92,7 @@ PropertyUtils简介与BeanUtils类似, 都是对javaBean进行操作的工具类
 <meta property="og:site_name" content="努力改变人生">
 <meta property="og:description" content="背景:最近要开始写报表工具类, 经常需要动态的设置属性, 当然java反射是完全可以做到的, 但是个人认为, 既然有封装好的方法, 那就直接使用封装好的方法就Ok了, 我的目的是完成工具类. 并且采用apache的工具, 使用起来也是非常方便的, 非常感谢apache组织为世界所作出的贡献
 PropertyUtils简介与BeanUtils类似, 都是对javaBean进行操作的工具类. 其中,">
-<meta property="og:updated_time" content="2017-01-19T11:21:26.000Z">
+<meta property="og:updated_time" content="2017-01-20T08:03:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PropertyUtils">
 <meta name="twitter:description" content="背景:最近要开始写报表工具类, 经常需要动态的设置属性, 当然java反射是完全可以做到的, 但是个人认为, 既然有封装好的方法, 那就直接使用封装好的方法就Ok了, 我的目的是完成工具类. 并且采用apache的工具, 使用起来也是非常方便的, 非常感谢apache组织为世界所作出的贡献
@@ -355,7 +355,191 @@ PropertyUtils简介与BeanUtils类似, 都是对javaBean进行操作的工具类
 <p>我们可以从属性描述中获取这个属性的java数据类型, 这样我们可以根据判断数据类型, 做对应的处理<br><code>Class&lt;?&gt; propertyType = descriptor.getPropertyType();</code>  </p>
 <p>输出结果:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">java</span>.<span class="title">lang</span>.<span class="title">String</span></span></div></pre></td></tr></table></figure>
-<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>有了这三个方法, 结合java反射, 我们就可以写一些功能比较全面的工具类, 也不需要自己再去封装获取属性, 设置值, 获取类型的方法了, 当然, 自己有能力的, 也可以封装一下, 这也不难.</p>
+<h4 id="getSimpleProperty"><a href="#getSimpleProperty" class="headerlink" title="getSimpleProperty"></a>getSimpleProperty</h4><p>它的功能和<code>getProperty()</code>有些类似, 都是获取bean对象的属性值, 当属性值是普通值的时候, 使用<code>getProperty()</code>和<code>getSimpleProperty()</code>得到的结果一样  </p>
+<pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    <span class="comment">// 创建新实例</span>
+    Car car = <span class="keyword">new</span> Car();
+    <span class="comment">// 设置属性</span>
+    <span class="comment">// String</span>
+    car.setName(<span class="string">"汽车"</span>);
+    <span class="comment">// int</span>
+    car.setCount(<span class="number">1</span>);
+    <span class="comment">// Integer</span>
+    car.setCountInt(<span class="number">2</span>);
+    <span class="comment">// 自定义数据类型</span>
+    Brand brand = <span class="keyword">new</span> Brand();
+    brand.setBrand(<span class="string">"凯迪拉克"</span>);
+    car.setBrand(brand);
+    <span class="comment">// List</span>
+    List list = <span class="keyword">new</span> ArrayList();
+    list.add(<span class="string">"Hello"</span>);
+    car.setList(list);
+    <span class="comment">// Map</span>
+    Map map = <span class="keyword">new</span> HashMap();
+    map.put(<span class="string">"map"</span>,<span class="string">"World"</span>);
+    car.setMap(map);
+    <span class="keyword">try</span> {
+        <span class="comment">// 这里演示如果知道数据类型, 是可以进行强制转换的</span>
+        Integer count = (Integer) PropertyUtils.getSimpleProperty(car, <span class="string">"count"</span>);
+        System.out.println(count);
+        <span class="comment">// 以下都是获取bean 中的属性值</span>
+        Object countInt = PropertyUtils.getSimpleProperty(car, <span class="string">"countInt"</span>);
+        System.out.println(countInt);
+
+        Object brand1 = PropertyUtils.getSimpleProperty(car, <span class="string">"brand"</span>);
+        System.out.println(brand1);
+
+        Object list1 = PropertyUtils.getSimpleProperty(car, <span class="string">"list"</span>);
+        System.out.println(list1);
+
+        Object map1 = PropertyUtils.getSimpleProperty(car, <span class="string">"map"</span>);
+        System.out.println(map1);
+
+    } <span class="keyword">catch</span> (IllegalAccessException e) {
+        e.printStackTrace();
+    } <span class="keyword">catch</span> (InvocationTargetException e) {
+        e.printStackTrace();
+    } <span class="keyword">catch</span> (NoSuchMethodException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre>
+<p>运行结果:   </p>
+<pre><code class="java"><span class="number">1</span>
+<span class="number">2</span>
+Brand{brand=<span class="string">'凯迪拉克'</span>}
+[Hello]
+{map=World}
+</code></pre>
+<p>由上面的结果可以看出, 使用<code>getSimpleProperty()</code>方法得到的结果和<code>getProperty()</code>方法得到的结果是一样的, 那不同点在什么地方, 后面再讲.  </p>
+<h4 id="setSimpleProperty"><a href="#setSimpleProperty" class="headerlink" title="setSimpleProperty"></a>setSimpleProperty</h4><p>这个就不多说了, 效果和<code>setProperty</code>也是一样的, 当然也有区别, 接下来就会讲到  </p>
+<h3 id="方法之间的区别"><a href="#方法之间的区别" class="headerlink" title="方法之间的区别"></a>方法之间的区别</h3><p>直接了解完<code>getProperty()</code>和<code>getSimpleProperty()</code>之间的区别, set方法之间的区别就理解了, 是一个意思<br>先来看看<code>getProperty()</code>的源码:    </p>
+<pre><code class="java"><span class="function"><span class="keyword">public</span> Object <span class="title">getNestedProperty</span><span class="params">(Object bean, String name)</span>
+        <span class="keyword">throws</span> IllegalAccessException, InvocationTargetException,
+        NoSuchMethodException </span>{
+
+    <span class="keyword">if</span> (bean == <span class="keyword">null</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"No bean specified"</span>);
+    }
+    <span class="keyword">if</span> (name == <span class="keyword">null</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"No name specified for bean class '"</span> +
+                bean.getClass() + <span class="string">"'"</span>);
+    }
+
+    <span class="comment">// Resolve nested references</span>
+    <span class="keyword">while</span> (resolver.hasNested(name)) {
+        String next = resolver.next(name);
+        Object nestedBean = <span class="keyword">null</span>;
+        <span class="keyword">if</span> (bean <span class="keyword">instanceof</span> Map) {
+            nestedBean = getPropertyOfMapBean((Map) bean, next);
+        } <span class="keyword">else</span> <span class="keyword">if</span> (resolver.isMapped(next)) {
+            nestedBean = getMappedProperty(bean, next);
+        } <span class="keyword">else</span> <span class="keyword">if</span> (resolver.isIndexed(next)) {
+            nestedBean = getIndexedProperty(bean, next);
+        } <span class="keyword">else</span> {
+            nestedBean = getSimpleProperty(bean, next);
+        }
+        <span class="keyword">if</span> (nestedBean == <span class="keyword">null</span>) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> NestedNullException
+                    (<span class="string">"Null property value for '"</span> + name +
+                    <span class="string">"' on bean class '"</span> + bean.getClass() + <span class="string">"'"</span>);
+        }
+        bean = nestedBean;
+        name = resolver.remove(name);
+    }
+
+    <span class="keyword">if</span> (bean <span class="keyword">instanceof</span> Map) {
+        bean = getPropertyOfMapBean((Map) bean, name);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (resolver.isMapped(name)) {
+        bean = getMappedProperty(bean, name);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (resolver.isIndexed(name)) {
+        bean = getIndexedProperty(bean, name);
+    } <span class="keyword">else</span> {
+        <span class="comment">/** 请看这里 */</span>
+        bean = getSimpleProperty(bean, name);
+    }
+    <span class="keyword">return</span> bean;
+
+}
+</code></pre>
+<p>在方法的最后部分, <code>/**请看这里*/</code> 可以看到当传入参数没有什么特别之处的时候, 它会直接调用<code>getSimpleProperty()</code>方法获取数据.  </p>
+<p>根据之前<code>getSimpleProperty()</code>方法的结果我们可以发现, 当我取用list集合, 和map集合中的数据的时候, 实际上是取出了所有数据, 那么如果我想取出集合中的某个元素, 我该怎么取用呢?  </p>
+<p>这就是<code>getProperty()</code>和<code>getSimpleProperty()</code>的差别所在了!  </p>
+<p>假设我们现在有一个java数组<code>arr[]</code>, 我们要那其中的数据, 应该在<code>[]</code>中填入我们要取用的索引值, 例如: <code>arr[1]</code>取用数组arr索引值为1(第二个元素, 0是第一个元素)的值, 对应的集合也是这种方式, 例如: <code>list[0]</code>取用集合第一个元素  </p>
+<pre><code class="java"><span class="comment">// 获取集合</span>
+Object list1 = PropertyUtils.getProperty(car, <span class="string">"list"</span>);
+System.out.println(list1);
+<span class="comment">// 获取集合中的某个元素</span>
+Object property = PropertyUtils.getProperty(car, <span class="string">"list[0]"</span>);
+System.out.println(property);
+</code></pre>
+<p>输出结果:</p>
+<pre><code class="java">[Hello]
+Hello
+</code></pre>
+<p>我觉得这足够清晰表达了, 我们直接使用<code>list</code>的时候, 实际上就是单纯的调用<code>getList()</code>来获取car中的list数据, 但是使用<code>list[0]</code>表示的意思是, 获取<code>car</code>中数据<code>list</code>的第一个元素的值, 所以我们调用<code>getProperty()</code>的时候, 如果判断出我们调用的属性(也就是<code>list[0]</code>这个部分)时, 发现我们使用index属性(也就是使用了<code>[]</code>之类的符号)就说明我名调用了嵌套类型(也就是调用了属性中的属性)的数据, 他就会取出<code>[]</code>中的只, 然后遍历, 取出该索引对应的值.<br>但是当我们使用<code>getSimpleProperty()</code>时, 如果判断出我们使用了嵌套类型数据, 就会抛出异常.<br>同理可得, map集合中的嵌套数据, 应该这样去取得: <code>map.key</code>, 以这样的方式去获得该key在map中所对应的值:  </p>
+<pre><code class="java">Object map1 = PropertyUtils.getProperty(car, <span class="string">"map.map"</span>);
+System.out.println(map1);
+</code></pre>
+<p>运行结果:  </p>
+<pre><code class="java">World
+</code></pre>
+<p>那么基本的五个方法以及差异也就说完了, 对应的set方法可以参照get去完成</p>
+<h3 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h3><h4 id="空指针问题"><a href="#空指针问题" class="headerlink" title="空指针问题"></a>空指针问题</h4><pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    <span class="comment">// 创建新实例</span>
+    Car car = <span class="keyword">new</span> Car();
+    <span class="keyword">try</span> {
+        PropertyUtils.setProperty(car, <span class="string">"list[0]"</span>, <span class="string">"hello"</span>);
+        System.out.println(car.getList());
+    } <span class="keyword">catch</span> (IllegalAccessException e) {
+        e.printStackTrace();
+    } <span class="keyword">catch</span> (InvocationTargetException e) {
+        e.printStackTrace();
+    } <span class="keyword">catch</span> (NoSuchMethodException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre>
+<p>如果只是<code>new</code>了一个<code>car</code>对象, 然后就直接设置属性, 那么会抛出一个空指针异常, 为什么就不说了(如果不知道就弥补一下java基础)<br>同理, 如果map中没有对应的key值, 同样会出现空指针异常</p>
+<h4 id="索引越界异常"><a href="#索引越界异常" class="headerlink" title="索引越界异常"></a>索引越界异常</h4><pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    <span class="comment">// 创建新实例</span>
+    Car car = <span class="keyword">new</span> Car();
+    List list = <span class="keyword">new</span> ArrayList();
+    car.setList(list);
+    <span class="keyword">try</span> {
+        PropertyUtils.setProperty(car, <span class="string">"list[0]"</span>, <span class="string">"hello"</span>);
+        System.out.println(car.getList());
+    } <span class="keyword">catch</span> (IllegalAccessException e) {
+        e.printStackTrace();
+    } <span class="keyword">catch</span> (InvocationTargetException e) {
+        e.printStackTrace();
+    } <span class="keyword">catch</span> (NoSuchMethodException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre>
+<p>如果我们手动new了一个list, 放进去, 那么在调用set方法的时候, 会抛出一个索引越界异常, 为什么呢? 因为, 这个属性设置, 不能向list中添加数据, 它只能修改数据, 而我们的list并没有放入任何数据, 所以<code>list[0]</code>并不存在, 所以越界了  </p>
+<pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    <span class="comment">// 创建新实例</span>
+    Car car = <span class="keyword">new</span> Car();
+    List list = <span class="keyword">new</span> ArrayList();
+    list.add(<span class="string">"world"</span>);
+    car.setList(list);
+    <span class="keyword">try</span> {
+        PropertyUtils.setProperty(car, <span class="string">"list[0]"</span>, <span class="string">"hello"</span>);
+        System.out.println(car.getList());
+    } <span class="keyword">catch</span> (IllegalAccessException e) {
+        e.printStackTrace();
+    } <span class="keyword">catch</span> (InvocationTargetException e) {
+        e.printStackTrace();
+    } <span class="keyword">catch</span> (NoSuchMethodException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre>
+<p>这样就没问题了⬆️<br>map集合如果没有对应的key, 会出现空指针异常  </p>
+<p>总之, 属性只能修改, 不能添加</p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>有了这5个方法, 结合java反射, 我们就可以写一些功能比较全面的工具类, 也不需要自己再去封装获取属性, 设置值, 获取类型的方法了, 当然, 自己有能力的, 也可以封装一下, 这也不难.<br>我之所以能用简单的方法写出适用自己项目的工具, 是因为我们站在巨人的肩膀上!</p>
 
       
     </div>
@@ -472,7 +656,7 @@ PropertyUtils简介与BeanUtils类似, 都是对javaBean进行操作的工具类
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -510,7 +694,7 @@ PropertyUtils简介与BeanUtils类似, 都是对javaBean进行操作的工具类
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PropertyUtils简介"><span class="nav-number">2.</span> <span class="nav-text">PropertyUtils简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PropertyUtils中的常用方法"><span class="nav-number">3.</span> <span class="nav-text">PropertyUtils中的常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#getProperty"><span class="nav-number">3.1.</span> <span class="nav-text">getProperty</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setProperty"><span class="nav-number">3.2.</span> <span class="nav-text">setProperty</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getPropertyDescriptor"><span class="nav-number">3.3.</span> <span class="nav-text">getPropertyDescriptor</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束语"><span class="nav-number">4.</span> <span class="nav-text">结束语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PropertyUtils简介"><span class="nav-number">2.</span> <span class="nav-text">PropertyUtils简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PropertyUtils中的常用方法"><span class="nav-number">3.</span> <span class="nav-text">PropertyUtils中的常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#getProperty"><span class="nav-number">3.1.</span> <span class="nav-text">getProperty</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setProperty"><span class="nav-number">3.2.</span> <span class="nav-text">setProperty</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getPropertyDescriptor"><span class="nav-number">3.3.</span> <span class="nav-text">getPropertyDescriptor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getSimpleProperty"><span class="nav-number">3.4.</span> <span class="nav-text">getSimpleProperty</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setSimpleProperty"><span class="nav-number">3.5.</span> <span class="nav-text">setSimpleProperty</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法之间的区别"><span class="nav-number">4.</span> <span class="nav-text">方法之间的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存在问题"><span class="nav-number">5.</span> <span class="nav-text">存在问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#空指针问题"><span class="nav-number">5.1.</span> <span class="nav-text">空指针问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引越界异常"><span class="nav-number">5.2.</span> <span class="nav-text">索引越界异常</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束语"><span class="nav-number">6.</span> <span class="nav-text">结束语</span></a></li></ol></div>
             
           </div>
         </section>
