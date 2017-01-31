@@ -138,8 +138,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-avatar: "http://www.qq745.com/uploads/allimg/160201/1-160201134K2.jpg"
-
+#avatar: "http://www.qq745.com/uploads/allimg/160201/1-160201134K2.jpg"
 
 # Table Of Contents in the Sidebar
 toc:
