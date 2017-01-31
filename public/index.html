@@ -251,6 +251,152 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/23/在Linux服务器配置java环境/" itemprop="url">
+                  在Linux服务器配置java环境
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-23T22:00:05+08:00" content="2017-01-23">
+              2017-01-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="下载java安装包"><a href="#下载java安装包" class="headerlink" title="下载java安装包"></a>下载java安装包</h3><p>在<a href="https://www.oracle.com/index.html" target="_blank" rel="external">Oracle官网</a>中找到Downloads<br>选择<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">Java for Development</a>下载对应的jdk版本  </p>
+<h3 id="将JDK从本地上传到服务器"><a href="#将JDK从本地上传到服务器" class="headerlink" title="将JDK从本地上传到服务器"></a>将JDK从本地上传到服务器</h3><p>我使用的工具是FileZilla, 输入主机Ip: xxx.xxx.xxx.xxx 用户名: root 密码: xxx 端口选择22就可以连接上服务器, 将我们所下载的JDK上传到服务器的某个目录下, 因为我是用root账户登录的, 所以直接放在<code>~</code>目录下(也就是<code>/root</code>目录)  </p>
+<h3 id="解压压缩包"><a href="#解压压缩包" class="headerlink" title="解压压缩包"></a>解压压缩包</h3><p><code>tar -zxvf jdk-8u121-linux-x64.tar.gz</code>    </p>
+<p><code>命令解释:</code><br><code>-x, --extract, --get extract files from an archive</code>从压缩包中抽取文件<br><code>-f, --file=ARCHIVE use archive file or device ARCHIVE</code>使用档案文件或设备档案<br><code>-v, --verbose verbosely list files processed</code>打印解压过程<br><code>-z, --gzip filter the archive through gzip</code>通过gzip格式解压<br>最终得到文件夹:<code>jdk1.8.0_121</code>  </p>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>进入到jdk1.8.0_121目录下:<br><code>cd jdk1.8.0_121</code><br>获取当前目录的全路径命令:<br><code>pwd</code><br>得到:<br><code>/usr/java/jdk1.8.0_121</code></p>
+<p>编辑配置文件:<br><code>vi /etc/profile</code></p>
+<p>添加如下内容: </p>
+<pre><code class="shell">export JAVA_HOME=/usr/java/jdk1.8.0_121
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+</code></pre>
+<h3 id="使配置生效"><a href="#使配置生效" class="headerlink" title="使配置生效"></a>使配置生效</h3><p><code>source profile</code>  或者 重启机器 <code>shutdown -r now</code></p>
+<h3 id="运行命令检验"><a href="#运行命令检验" class="headerlink" title="运行命令检验"></a>运行命令检验</h3><p><code>java -version</code>  如果命令能够执行, 说明环境配置完成</p>
+<h3 id="注意-系统位数要和JDK的位数对应"><a href="#注意-系统位数要和JDK的位数对应" class="headerlink" title="注意, 系统位数要和JDK的位数对应"></a>注意, 系统位数要和JDK的位数对应</h3><p>32位系统对应32位JDK, 64位系统对应64位JDK</p>
+<h3 id="将JDK设为系统默认程序"><a href="#将JDK设为系统默认程序" class="headerlink" title="将JDK设为系统默认程序"></a>将JDK设为系统默认程序</h3><pre><code class="shell">update-alternatives --install /usr/bin/java java /usr/java/jdk1.8.0_121/bin/java 50
+</code></pre>
+<pre><code class="shell">update-alternatives --install /usr/bin/javac javac /usr/java/jdk1.8.0_121//bin/javac 50
+</code></pre>
+<pre><code class="shell">update-alternatives --config
+</code></pre>
+<p>这个命令查看系统已经配置的JDK版本  </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/01/19/PropertyUtils/" itemprop="url">
                   PropertyUtils
                 </a>
@@ -1304,7 +1450,7 @@ Answer = True
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1312,7 +1458,7 @@ Answer = True
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1321,7 +1467,7 @@ Answer = True
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
