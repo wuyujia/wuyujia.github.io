@@ -1,0 +1,15 @@
+---
+title: Git Pages设置
+index: true
+---
+
+## 创建Github账号
+
+[https://github.com/](https://github.com/)
+
+创建一个公开仓库名字: `<你的github账号>.github.io`
+
+## 开启 gh-pages 功能
+
+创建完成后点击界面右侧的 `Settings`，向下拖动，直到看见 `GitHub Pages`，点击 `Automatic page generator`，Github 将会自动替你创建出一个 gh-pages 的页面。
+如果你的配置没有问题，那么大约15分钟之后，`https://<你的github账号>.github.io` 这个网址就可以正常访问了

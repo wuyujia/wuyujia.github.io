@@ -14,9 +14,11 @@ export default hopeTheme({
 
   logo: "/logo.jpg",
 
-  repo: "vuepress-theme-hope/vuepress-theme-hope",
+  repo: "wuyujia/wuyujia.github.io",
 
-  docsDir: "demo/theme-docs/src",
+  docsDir: "src/",
+
+  docsBranch: "vuepress",
 
   locales: {
     "/": {
@@ -26,7 +28,7 @@ export default hopeTheme({
       // sidebar
       sidebar: zhSidebar,
 
-      footer: "默认页脚",
+      footer: "",
 
       displayFooter: true,
 
@@ -45,10 +47,10 @@ export default hopeTheme({
   },
 
   plugins: {
-    comment: {
-      // @ts-expect-error: You should generate and use your own comment service
-      provider: "Waline",
-    },
+    // comment: {
+    //   // @ts-expect-error: You should generate and use your own comment service
+    //   provider: "Waline",
+    // },
 
     // all features are enabled for demo, only preserve features you need here
     mdEnhance: {
@@ -92,7 +94,9 @@ export default hopeTheme({
       vPre: true,
       vuePlayground: true,
     },
+    copyCode: {
 
+    },
     // uncomment these if you want a pwa
     // pwa: {
     //   favicon: "/favicon.ico",
