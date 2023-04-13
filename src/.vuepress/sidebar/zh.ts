@@ -10,13 +10,19 @@ export const zhSidebar = sidebar({
       children: "structure",
     },
     {
-      icon: "discover",
-      text: "案例",
-      prefix: "demo/",
-      link: "demo/",
+      text: "Java",
+      icon: "java",
+      prefix: "java/",
       children: "structure",
     },
+    // {
+    //   icon: "discover",
+    //   text: "案例",
+    //   prefix: "demo/",
+    //   link: "demo/",
+    //   children: "structure",
+    // },
     
-    "slides",
+    // "slides",
   ],
 });

@@ -4,6 +4,7 @@ import theme from "./theme.js";
 
 export default defineUserConfig({
   base: "/",
+  port: 3000,
   head: [
     ['link', { rel: 'icon', href: '/logo.jpg' }]
   ],
