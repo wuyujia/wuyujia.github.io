@@ -18,7 +18,7 @@ features:
   - title: 博客搭建
     icon: app
     details: 使用VuePress搭建博客教程以及常见问题解决
-    link: /guide/vuepress/guide.md
+    link: /guide/vuepress/1.guide.md
 
   - title: Markdown 增强
     icon: markdown
