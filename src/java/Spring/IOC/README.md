@@ -58,3 +58,54 @@ graph BT
 ```
 :::
 
+## Bean的定义
+
+在了解容器如何创建 Bean 之前需要知道 Bean 的信息是怎么解析、存储的。有助于进一步了解 Bean 的属性定义有哪些。
+
+Spring 框架里所有通过 XML 或者通过 Java `@Bean`注解配置的 Bean 都会被解析成 `BeanDefinition`，在容器初始化对象时，会根据 `BenDefinition` 来创建对象
+
+`BeanDefinition` 定义属性如下（根据 Setter 属性来描述）：  
+~只例举常见且用得到的属性~
+``` class
+class BeanDefinition {
+  String beanClassName      # bean 对象名称
+  String scope              # bean 的作用域：singleton、prototype
+  boolean lazyInit          # 懒加载
+  String[] dependsOn        # 依赖对象：通过成员变量分析得来
+  boolean autowireCandidate # 自动推断：仅当按类型注入时有效
+  boolean primary           # 是否为主 Bean：同类型 多个Bean有效
+  String factoryBeanName    # 创建 Bean 的工厂名称
+  String factoryMethodName  # 指定调用的工厂方法名
+  ConstructorArgumentValues # Bean 的构造参数（已注入的构造参数）
+  MutablePropertyValues     # Bean 的属性（已注入的属性）
+  String initMethodName     # Bean 的初始化方法
+  String destroyMethodName  # Bean 的销毁方法
+}
+```
+以上就是我们 Bean 的定义，其中很多参数都是可以通过配置方式去控制 Bean 的创建行为的，以及 Bean 的生命周期，之后再说。
+
+## Bean 的作用域
+
+在 Spring 中，Bean 的作用域用于定义 Bean 实例在容器中的生命周期，包括 Bean 实例的创建、初始化、销毁等阶段。
+
+下面是 Spring 中常用的 Bean 作用域：
+
+- **singleton**：单例模式，一个容器中只存在一个实例。默认作用域。
+
+- **prototype**：多例模式，每次从容器中获取 Bean 时都会创建一个新的实例。
+
+- request：用于 Web 应用中，每次 HTTP 请求都会创建一个新的实例，仅适用于 Web 应用上下文。
+
+- session：用于 Web 应用中，同一个会话（Session）共享一个实例，不同会话之间的实例是不同的，仅适用于 Web 应用上下文。
+
+- global session：用于 Web 应用中，同一个全局 Session 共享一个实例，适用于 Portlet 应用上下文。
+
+- application：用于 Web 应用中，整个 Web 应用共享一个实例，适用于 Web 应用上下文。
+
+- websocket：用于 Web 应用中，每个 WebSocket 会话共享一个实例，仅适用于 Web 应用上下文。
+
+- custom：自定义作用域，可以根据具体的需求进行扩展和实现。
+
+通过定义不同的 Bean 作用域，可以更加灵活地管理 Bean 实例的生命周期和资源消耗。需要注意的是，作用域为 prototype 的 Bean 实例需要手动释放资源，否则可能会导致资源泄漏问题。
+
+## Bean 生命周期

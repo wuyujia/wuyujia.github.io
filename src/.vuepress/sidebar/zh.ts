@@ -15,6 +15,12 @@ export const zhSidebar = sidebar({
       prefix: "java/",
       children: "structure",
     },
+    {
+      text: "工具集",
+      icon: "tool",
+      prefix: "utils/",
+      children: "structure",
+    },
     // {
     //   icon: "discover",
     //   text: "案例",
