@@ -16,6 +16,12 @@ export const zhSidebar = sidebar({
       children: "structure",
     },
     {
+      text: "MySQL",
+      icon: "mysql",
+      prefix: "mysql/",
+      children: "structure",
+    },
+    {
       text: "工具集",
       icon: "tool",
       prefix: "utils/",

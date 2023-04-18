@@ -25,6 +25,11 @@ features:
     details: 涵盖与Java有关的知识点
     link: /java/
 
+  - title: MySQL知识点
+    icon: mysql
+    details: 涵盖与mysql有关的知识点
+    link: /mysql/
+
   - title: 工具收集
     icon: tool
     details: 日常工具积累
