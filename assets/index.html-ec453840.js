@@ -1,0 +1,1 @@
+import{_ as n,W as o,X as a,Y as e,$ as l,a1 as s,C as c,Z as r}from"./framework-aa83d01c.js";const _={};function m(d,i){const t=c("RouterLink");return o(),a("div",null,[e("ul",null,[e("li",null,[l(t,{to:"/mysql/Command.html"},{default:s(()=>[r("常用命令收集")]),_:1})])])])}const f=n(_,[["render",m],["__file","index.html.vue"]]);export{f as default};
