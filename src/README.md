@@ -35,6 +35,11 @@ features:
     details: 日常工具积累
     link: /utils/
 
+  - title: 开发环境搭建
+    icon: setting
+    details: 常用开发语言环境搭建
+    link: /dev/
+
 #   - title: 布局增强
 #     icon: layout
 #     details: 添加路径导航、页脚、改进的导航栏、改进的页面导航等。
