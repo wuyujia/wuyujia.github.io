@@ -246,6 +246,8 @@ conf/example/instance.properties
 canal.instance.filter.regex=db.tb1,db.tb2,db.tb3
 ```
 
+
+
 ## 关于 Canal 生产环境的恰当配置思考
 1. 上面对接MQ的逻辑就已经足够了，大数据量还是用RocketMQ或者Kafka比较好，特别是Kafka，目前生产环境数据链不大，所以无需太过介意使用RabbitMQ  
 对接MQ主要原因还是因为避免Canal客户端处理延迟导致消费过慢的问题。
