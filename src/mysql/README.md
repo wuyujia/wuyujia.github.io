@@ -3,5 +3,7 @@ title: MySQL
 index: true
 ---
 
+## 目录
 - [常用命令收集](./Command.md)
 - [基础知识](./MySQL_Base.md)
+- [Canal](./Canal.md)
