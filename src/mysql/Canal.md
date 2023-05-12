@@ -241,12 +241,31 @@ sh ./bin/startup:.sh
 由于数据计算不需要监听所有表，因此在Canal配置时应当细化要监听的表，修改内容如下：  
 conf/example/instance.properties
 ``` properties
-
 # 监听数据库表 逗号分隔
-canal.instance.filter.regex=db.tb1,db.tb2,db.tb3
+canal.mq.dynamicTopic=tb_test\\.table
 ```
 
+修改之后数据会被发往: tb_test_table topic，拼接方式为 库名_表名, 这样能有效降低MQ的压力，让消费方只关注需要关注的内容
 
+
+服务端消费优化, 只关心某一张表，这样在做JSON序列化时，就能够直接映射为具体实体类了
+``` java
+@RabbitListener(bindings = {
+            @QueueBinding(
+                    value = @Queue("${canal.queue}"),
+                    exchange = @Exchange(name = "${canal.exchange}", type = ExchangeTypes.TOPIC),
+                    key = {"${canal.topic}_table"}
+            )
+})
+@RabbitHandler
+public void onMessage(@Payload String payload, Channel channel, @Headers Map<String, Object> headers) throws IOException {
+	System.err.println("--------------------------------------");
+	System.err.println("消费端Payload: " + payload);
+	Long deliveryTag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
+	//手工ACK
+	channel.basicAck(deliveryTag, false);
+}
+```
 
 ## 关于 Canal 生产环境的恰当配置思考
 1. 上面对接MQ的逻辑就已经足够了，大数据量还是用RocketMQ或者Kafka比较好，特别是Kafka，目前生产环境数据链不大，所以无需太过介意使用RabbitMQ  
@@ -257,3 +276,5 @@ canal.instance.filter.regex=db.tb1,db.tb2,db.tb3
 ## 参考
 - [【开源实战】Canal生产环境部署常见问题分析](https://cloud.tencent.com/developer/beta/article/1643293)
 - [超详细canal入门，看这篇就够了](https://zhuanlan.zhihu.com/p/177001630)
+- [canal配置详解](https://blog.csdn.net/qq_26502245/article/details/90445323)
+- [canal dynamicTopic 问题](https://blog.csdn.net/ashic/article/details/104722975)

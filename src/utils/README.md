@@ -11,3 +11,6 @@ index: true
 
 ## 代码分析调试工具
 - [arthas](./arthas/README.md)
+
+## IDEA 工具
+- [JPA](./idea/JPA.md)

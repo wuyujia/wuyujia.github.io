@@ -1,8 +1,8 @@
 import { sidebar } from "vuepress-theme-hope";
 
 export const zhSidebar = sidebar({
-  "/": [
-    "",
+  // "/": [
+    // "",
     // {
     //   text: "导航",
     //   icon: "note",
@@ -36,5 +36,5 @@ export const zhSidebar = sidebar({
     // },
     
     // "slides",
-  ],
+  // ],
 });
