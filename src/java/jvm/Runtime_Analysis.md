@@ -99,3 +99,4 @@ cat jstack.log | grep "java.lang.Thread.State" | sort -nr | uniq -c
 ## 参考
 - [JAVA 线上故障排查完整套路！牛掰！](https://cloud.tencent.com/developer/article/1633434)
 - [线上服务Java进程假死快速排查、分析](https://zhuanlan.zhihu.com/p/529350757)
+- [JVM故障分析及性能优化系列之四：jstack生成的Thread Dump日志线程状态](https://www.javatang.com/archives/2017/10/25/36441958.html)
