@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "docs:build": "vuepress build src",
-    "docs:clean-dev": "vuepress dev src --clean-cache",
-    "docs:dev": "vuepress dev src",
+    "docs:clean-dev": "vuepress dev src --clean-cache --temp .temp",
+    "docs:dev": "vuepress dev src --temp .temp",
     "docs:update-package": "yarn dlx vp-update",
     "docs:deploy": "/bin/bash deploy.sh"
   },
