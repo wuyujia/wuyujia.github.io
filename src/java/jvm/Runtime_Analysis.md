@@ -94,3 +94,8 @@ cat jstack.log | grep "java.lang.Thread.State" | sort -nr | uniq -c
 ```
 
 :::
+
+
+## 参考
+- [JAVA 线上故障排查完整套路！牛掰！](https://cloud.tencent.com/developer/article/1633434)
+- [线上服务Java进程假死快速排查、分析](https://zhuanlan.zhihu.com/p/529350757)
