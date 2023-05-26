@@ -3,6 +3,9 @@ title: 工具收集
 index: true
 ---
 
+## 开发者网页工具
+- [开发者搜索](https://kaifa.baidu.com/)
+
 ## 低代码平台
 - [Zion](https://www.functorz.com/)
 - [JVS](https://gitee.com/software-minister)
@@ -14,3 +17,6 @@ index: true
 
 ## IDEA 工具
 - [JPA](./idea/JPA.md)
+
+## 其它网页收藏
+- [免费听歌](https://tool.liumingye.cn/)
