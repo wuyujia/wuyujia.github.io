@@ -18,5 +18,8 @@ index: true
 ## IDEA 工具
 - [JPA](./idea/JPA.md)
 
+## 桌面软件开发
+- [Electron](../desktop/README.md)
+
 ## 其它网页收藏
 - [免费听歌](https://tool.liumingye.cn/)

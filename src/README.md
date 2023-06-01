@@ -40,6 +40,11 @@ features:
     details: 常用开发语言环境搭建
     link: /dev/
 
+  - title: 常用命令
+    icon: function
+    details: 常用开发语言环境搭建
+    link: /linux/
+
 #   - title: 布局增强
 #     icon: layout
 #     details: 添加路径导航、页脚、改进的导航栏、改进的页面导航等。

@@ -131,3 +131,6 @@ docker pull nginx
 ## VMware Fusion 12
 安装程序网盘有，热心网友激活码：NH001-8HJ06-18LJ3-0L926-98RP4
 
+## 截图工具
+iShot Pro，AppStore已购买正版，永久使用
+
