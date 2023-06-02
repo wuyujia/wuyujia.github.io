@@ -30,6 +30,11 @@ features:
     details: 涵盖与mysql有关的知识点
     link: /mysql/
 
+  - title: Node
+    icon: node
+    details: NodeJS相关
+    link: /node/
+
   - title: 工具收集
     icon: tool
     details: 日常工具积累
