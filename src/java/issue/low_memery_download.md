@@ -223,6 +223,31 @@ public class StreamController {
 
 ```
 
+@tab StreamMapper.java
+``` java
+package com.example.exportbitdata;
+
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.ResultSetType;
+import org.apache.ibatis.session.ResultHandler;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Mapper
+@Repository
+public interface StreamMapper {
+
+    @Select("SELECT * FROM t_stream LIMIT #{size}")
+    List<StreamDTO> normalSelectLimit(int size);
+
+    @Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = Integer.MIN_VALUE)
+    @ResultType(StreamDTO.class)
+    @Select("SELECT * FROM t_stream LIMIT #{size}")
+    void streamSelectLimit(@Param("size") int size, ResultHandler<StreamDTO> handler);
+}
+```
+
 @tab 测试启动脚本
 ``` bash
 # 启动命令
