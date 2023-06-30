@@ -285,4 +285,8 @@ flowchart LR
 ```
 :::
 
-## 技术实现
+## 参考文档
+- [MySQL以cursor方式读取（useCursorFetch，FetchSize参数）](https://blog.51cto.com/u_15127595/3391934)
+- [如何通过 MyBatis 查询千万数据并保证内存不溢出?](https://zhuanlan.zhihu.com/p/373351899)
+- [MySQL如何流式读取千万级大数据](https://zhuanlan.zhihu.com/p/421952313)
+- [炸了！使用 MyBatis 查询千万数据量？](https://zhuanlan.zhihu.com/p/341012871)
