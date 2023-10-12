@@ -23,3 +23,6 @@ index: true
 
 ## 其它网页收藏
 - [免费听歌](https://tool.liumingye.cn/)
+
+## Mac系统移动硬盘不识别问题修复
+- [超牛逼](./repaire_device.md)
