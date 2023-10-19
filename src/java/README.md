@@ -3,6 +3,9 @@ title: Java
 index: true
 ---
 
+## Java基础
+- [Java基础](./base/README.md)
+
 ## JVM
 - [JVM参数调优](./jvm/Args.md)
 - [运行时问题分析](./jvm/Runtime_Analysis.md)
