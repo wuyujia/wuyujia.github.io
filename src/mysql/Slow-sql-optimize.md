@@ -7,7 +7,8 @@ index: true
 
 背景：MySQL单节点负载过高，先不要盲目增加从节点来提升负载能力，应先进行SQL调优，保证单机性能的优化达到一个优秀的地步  
 
-一、先确定是否开启慢查询日志，如果没有开启，则先开启慢查询日志记录
+### 一、先确定是否开启慢查询日志
+如果没有开启，则先开启慢查询日志记录
 ``` sql
 show variables like ‘slow_query_log’;
 ```
@@ -22,7 +23,7 @@ mysql> show variables like 'slow_query_log';
 1 row in set (0.01 sec)
 ```
 
-二、查看慢查询时间阈值
+### 二、查看慢查询时间阈值
 ```sql
 show variables like 'long_query_time';
 ```
@@ -37,7 +38,7 @@ mysql> show variables like 'long_query_time';
 1 row in set (0.00 sec)
 ```
 
-三、查看慢查询日志存储位置
+### 三、查看慢查询日志存储位置
 ```sql
 show variables like 'slow_query_log_file';
 ```
@@ -56,8 +57,24 @@ mysql> show variables like 'slow_query_log_file';
 以上内容都可以通过`my.cnf`或者`set global`命令修改
 :::
 
-四、查询慢查询日志，取出其中的SQL进行分析优化
+### 四、查询慢查询日志，取出其中的SQL进行分析优化
+`mysqldumpslow`是导出并分析慢SQL的工具，下面说一下基本参数
+- -s : 排序类型
+    - t, 按查询时间或者平均查询时间排序
+    - l, 按锁表时间排序
+    - r, 按返回数据条目数进行排序
+    - c, 按使用次数总数排序
+
+- -t : TopN 返回排序前N条数据
+
+例如：
+``` shell
+ mysqldumpslow -s c -t 10 ./slow.log > .slow-20231122.log  # 取出使用最多的10条慢查询
+```
+
 EXPLAIN {SQL}
+
+
 
 ## 慢查询分析优化
 

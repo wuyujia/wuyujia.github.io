@@ -10,3 +10,4 @@ index: true
 - [Canal](./Canal.md)
 - [死锁分析](./DeadLock.md)
 - [慢查询分析与优化](./Slow-sql-optimize.md)
+- [配置my.cnf](./my.cnf.md)

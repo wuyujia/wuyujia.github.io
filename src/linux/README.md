@@ -18,3 +18,6 @@ IP      : xxx.xx.xx.xx
 
 ## 日志切割
 [日志切割](./crontab.md)
+
+## 简易跳板机
+[跳板机](./jump.md)
