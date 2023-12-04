@@ -23,12 +23,12 @@ IP      : xxx.xx.xx.xx
 [跳板机](./jump.md)
 
 ## 压缩日志文件
-单个
+单个压缩
 ```bash
 tar -zcvf log.tar.gz stdout.log
 ```
 
-批量
+批量压缩并删除源文件
 ```bash
 find . -maxdepth 1 -name "stdout.log.2020-03-*" -type f | xargs -I {} tar -zcvf {}.tar.gz {} --remove-files
 ```
@@ -36,3 +36,11 @@ find . -maxdepth 1 -name "stdout.log.2020-03-*" -type f | xargs -I {} tar -zcvf 
 -maxdepth 1 : 表示搜索目录深度，取1表示只在当前目录下检索，不会检索子目录
 -name “stdout.log.2020-03-*” : 表示匹配文件名规则
 –remove-files : 表示压缩完成后删除源文件
+
+
+批量压缩并删除源文件，排查指定后缀名文件
+```bash
+find . -maxdepth 1 -name "stdout.log.2020-04-2*" -type f ! -name "*.gz" | xargs -I {} tar -zcvf {}.tar.gz {} --remove-files
+```
+> 说明
+! -name “*.gz” : 排查以 .gz 后缀的文件
