@@ -6,6 +6,9 @@ index: true
 ## 开发者网页工具
 - [开发者搜索](https://kaifa.baidu.com/)
 
+## 服务器监控
+[监控](./系统监控.md)
+
 ## 低代码平台
 - [Zion](https://www.functorz.com/)
 - [JVS](https://gitee.com/software-minister)
