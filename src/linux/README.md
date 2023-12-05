@@ -44,3 +44,30 @@ find . -maxdepth 1 -name "stdout.log.2020-04-2*" -type f ! -name "*.gz" | xargs 
 ```
 > 说明
 ! -name “*.gz” : 排查以 .gz 后缀的文件
+
+## 清理Linux垃圾
+journal垃圾清理
+```bash
+journalctl --vacuum-size=10M
+# 删除 /var/log/journal/xxxx 下面的系统日志
+```
+
+mongod日志清理
+```bash
+echo "" > /var/log/mongodb/mongod.log
+```
+
+mysql慢SQL日志
+```mysql
+# 关闭慢SQL日志打印
+set global slow_query_log=0;
+
+# 确认文件地址
+show variables like ‘%slow%’;
+
+# 更名历史文件
+mv slow.log.bak
+
+# 开启慢SQL日志打印
+set global slow_query_log=1;
+```
