@@ -1,32 +1,61 @@
 import { sidebar } from "vuepress-theme-hope";
 
 export const zhSidebar = sidebar({
-  // "/": [
-    // "",
-    // {
-    //   text: "导航",
-    //   icon: "note",
-    //   prefix: "guide/",
-    //   children: "structure",
-    // },
-    // {
-    //   text: "Java",
-    //   icon: "java",
-    //   prefix: "java/",
-    //   children: "structure",
-    // },
-    // {
-    //   text: "MySQL",
-    //   icon: "mysql",
-    //   prefix: "mysql/",
-    //   children: "structure",
-    // },
-    // {
-    //   text: "工具集",
-    //   icon: "tool",
-    //   prefix: "utils/",
-    //   children: "structure",
-    // },
+  "/": [
+    {
+      text: "导航",
+      icon: "",
+      prefix: "guide/",
+      children: "structure",
+    },
+    {
+      text: "Java",
+      icon: "",
+      prefix: "java/",
+      children: "structure",
+    },
+    {
+      text: "MySQL",
+      icon: "",
+      prefix: "mysql/",
+      children: "structure",
+    },
+    {
+      text: "Redis",
+      icon: "",
+      prefix: "redis/",
+      children: "structure",
+    },
+    {
+      text: "Node",
+      icon: "",
+      prefix: "node/",
+      children: "structure",
+    },
+    {
+      text: "Linux",
+      icon: "",
+      prefix: "linux/",
+      children: "structure",
+    },
+    {
+      text: "工具集",
+      icon: "",
+      prefix: "utils/",
+      children: "structure",
+    },
+    {
+      text: "开发工具相关",
+      icon: "",
+      prefix: "dev/",
+      children: "structure",
+    },
+    {
+      text: "桌面软件开发",
+      icon: "",
+      prefix: "desktop/",
+      children: "structure",
+    },
     // {
     //   icon: "discover",
     //   text: "案例",
@@ -36,5 +65,5 @@ export const zhSidebar = sidebar({
     // },
     
     // "slides",
-  // ],
+  ],
 });

@@ -5,50 +5,54 @@ title: 首页
 heroImage: /logo.jpg
 heroText: 学习笔记
 tagline: 日积月累，量变产生质变
-# actions:
-#   - text: 使用指南 💡
-#     link: /demo/
-#     type: primary
+actions:
+  # - text: 使用指南 💡
+  #   link: /demo/
+  #   type: primary
 
-#   - text: 文档
-#     link: /articles/
-
-features:
-
-  - title: 博客搭建
-    icon: app
-    details: 使用VuePress搭建博客教程以及常见问题解决
+  - text: 开始浏览 💡
     link: /guide/vuepress/1.guide.md
 
-  - title: Java知识点
-    icon: java
-    details: 涵盖与Java有关的知识点
-    link: /java/
+# features:
 
-  - title: MySQL知识点
-    icon: mysql
-    details: 涵盖与mysql有关的知识点
-    link: /mysql/
+#   - title: 开始浏览
+#     icon: app
+#     link: /guide/vuepress/1.guide.md
 
-  - title: Node
-    icon: node
-    details: NodeJS相关
-    link: /node/
+  # - title: 博客搭建
+  #   icon: app
+  #   details: 使用VuePress搭建博客教程以及常见问题解决
+  #   link: /guide/vuepress/1.guide.md
 
-  - title: 工具收集
-    icon: tool
-    details: 日常工具积累
-    link: /utils/
+  # - title: Java知识点
+  #   icon: java
+  #   details: 涵盖与Java有关的知识点
+  #   link: /java/
 
-  - title: 开发环境搭建
-    icon: setting
-    details: 常用开发语言环境搭建
-    link: /dev/
+  # - title: MySQL知识点
+  #   icon: mysql
+  #   details: 涵盖与mysql有关的知识点
+  #   link: /mysql/
 
-  - title: 常用命令
-    icon: function
-    details: 常用开发语言环境搭建
-    link: /linux/
+  # - title: Node
+  #   icon: node
+  #   details: NodeJS相关
+  #   link: /node/
+
+  # - title: 工具收集
+  #   icon: tool
+  #   details: 日常工具积累
+  #   link: /utils/
+
+  # - title: 开发环境搭建
+  #   icon: setting
+  #   details: 常用开发语言环境搭建
+  #   link: /dev/
+
+  # - title: 常用命令
+  #   icon: function
+  #   details: 常用开发语言环境搭建
+  #   link: /linux/
 
 #   - title: 布局增强
 #     icon: layout

@@ -1,5 +1,5 @@
 ---
-title: Mac系统移动硬盘不识别问题修复
+title: Mac移动硬盘不识别问题修复
 index: true
 ---
 
