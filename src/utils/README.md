@@ -14,3 +14,6 @@ index: true
 
 ## 其它网页收藏
 - [免费听歌](https://tool.liumingye.cn/)
+
+## 优秀技术博客
+- [plantegg-覆盖面还挺广的](https://plantegg.github.io/)
