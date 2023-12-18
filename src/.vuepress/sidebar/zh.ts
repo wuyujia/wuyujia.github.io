@@ -47,7 +47,7 @@ export const zhSidebar = sidebar({
     {
       text: "开发工具相关",
       icon: "",
-      prefix: "dev/",
+      prefix: "Development/",
       children: "structure",
     },
     {
