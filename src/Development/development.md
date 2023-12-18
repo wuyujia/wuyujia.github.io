@@ -49,6 +49,7 @@ JDK: 安项目要求安装即可，Mac系统安装完甚至连环境变量都不
 ### IDE安装
 - Visual Studio Code: 搜索下载
 - `IntelliJ IDEA`: [官方下载](https://www.jetbrains.com.cn/idea/download/#section=mac), 百度网盘有`2023.1`版本，可以直接用，破解办法也在网盘
+- 破解：[访问这里](https://3.jetbra.in/)，看看有什么地址可以访问，然后进去下载jebra.zip包，解压后运行scripts/install.sh命令就完成了破解
 - IDEA 插件列表:
     - `Maven Dependency Helper`: 能够帮助分析包版本冲突, 以及快捷排除冲突项
     - `MyBatisCodeHelperPro`: 如果项目使用 Mybatis 且同时使用 mapper.xml 文件，建议安装，能方便直接从接口到文件, 除了这款还有其它类似插件，任选即可，收费软件，但免费功能足矣

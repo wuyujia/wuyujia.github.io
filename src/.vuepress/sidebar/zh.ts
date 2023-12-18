@@ -56,6 +56,12 @@ export const zhSidebar = sidebar({
       prefix: "desktop/",
       children: "structure",
     },
+    {
+      text: "移动端开发",
+      icon: "",
+      prefix: "mobile/",
+      children: "structure",
+    },
     // {
     //   icon: "discover",
     //   text: "案例",
